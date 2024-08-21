@@ -11,6 +11,7 @@ spec:
           mountPath: /usr/share/nginx/html
     - name: nginx-content
       image: devopsb78/b78-nginx:v1
+      imagePullPolicy: Always
       volumeMounts:
         - name: nginx-path
           mountPath: /usr/share/nginx/html
