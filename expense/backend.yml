@@ -28,6 +28,7 @@ spec:
   containers:
     - name: backend
       image: 368761340104.dkr.ecr.us-east-1.amazonaws.com/expense-backend:2.0.1
+      command: ["sleep","1000"]
       volumeMounts:
         - name: vault
           mountPath: /data
