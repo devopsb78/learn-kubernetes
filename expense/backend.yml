@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backend
+spec:
+  containers:
+    - name: backend
+      image: 368761340104.dkr.ecr.us-east-1.amazonaws.com/expense-backend:2.0.0
