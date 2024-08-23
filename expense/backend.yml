@@ -3,6 +3,31 @@ kind: Pod
 metadata:
   name: backend
 spec:
+  volumes:
+    - name: vault
+      emptyDir:
+        sizeLimit: 5Mi
+  initContainers:
+    - name: vault
+      image: 368761340104.dkr.ecr.us-east-1.amazonaws.com/vault-init-container:v1
+      env:
+        - name: VAULT_ADDR
+          value: "https://vault-internal.ramdevops78.online:8200"
+        - name: VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: vault-token
+              key: token
+        - name: SECRET_NAME
+          value: expense-dev/backend
+        - name: VAULT_SKIP_VERIFY
+          value: "TRUE"
+      volumeMounts:
+        - name: vault
+          mountPath: /data
   containers:
     - name: backend
-      image: 368761340104.dkr.ecr.us-east-1.amazonaws.com/expense-backend:2.0.0
+      image: 368761340104.dkr.ecr.us-east-1.amazonaws.com/expense-backend:2.0.1
+      volumeMounts:
+        - name: vault
+          mountPath: /data
