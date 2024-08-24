@@ -9,6 +9,7 @@ spec:
   containers:
     - name: frontend
       image: 368761340104.dkr.ecr.us-east-1.amazonaws.com/expense-frontend:2.0.0
+      imagePullPolicy: Always
 
 ---
 apiVersion: v1
@@ -16,7 +17,7 @@ kind: Service
 metadata:
   name: frontend
 spec:
-  type: loadBalancer
+  type: LoadBalancer
   selector:
     appName: frontend
     projectName: expense
